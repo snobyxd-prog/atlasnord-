@@ -1,0 +1,15 @@
+# Llaves privées / secrets — jamais publier
+adbkey
+adbkey.pub
+
+# Autres projets dans ce dossier, sans lien avec le site Atlas Nord
+isla/
+isla2d/
+juego/
+
+# Config locale de l'outil / éditeur
+.claude/
+
+# Photos non utilisées par le site (remplacées par des photos de stock) —
+# conservées sur le disque, mais pas publiées dans ce dépôt.
+assets/gallery/

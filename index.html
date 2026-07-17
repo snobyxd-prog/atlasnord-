@@ -1,0 +1,967 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Atlas Nord | Construction Générale — Montréal</title>
+<meta name="description" content="Atlas Nord — Entreprise de construction générale à Montréal. Certifiée RBQ 5830-2126-01. Tél. (514) 431-1433.">
+<link rel="icon" type="image/svg+xml" href="assets/brand/logo-atlas-nord.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,wght@0,300;0,400;0,500;0,600;1,400&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+/* ===== VARIABLES ===== */
+:root {
+  --brick:       #0EA5E9;
+  --brick-dark:  #0B3556;
+  --brick-light: #7DD3FC;
+  --dark:        #000000;
+  --dark2:       #04070a;
+  --dark3:       #0a0f16;
+  --text:        #f5f8fa;
+  --muted:       #8a96a3;
+  --accent:      #38BDF8;
+  --border:      rgba(255,255,255,0.08);
+}
+
+/* ===== RESET ===== */
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: 'Inter', system-ui, sans-serif;
+  background: var(--dark);
+  color: var(--text);
+  overflow-x: hidden;
+}
+img { display: block; max-width: 100%; }
+a { text-decoration: none; color: inherit; }
+
+/* ===== NAV (capsule flottante, style hero-section-5) ===== */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 200;
+  padding: 0.7rem 1.2rem 0;
+}
+.nav-inner {
+  max-width: 1240px; margin: 0 auto;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0.75rem 1.6rem;
+  border-radius: 100px;
+  background: transparent;
+  border: 1px solid transparent;
+  transition: background 0.3s, border-color 0.3s, backdrop-filter 0.3s, padding 0.3s;
+}
+nav.scrolled .nav-inner {
+  background: rgba(10,10,10,0.72);
+  backdrop-filter: blur(16px);
+  border-color: var(--border);
+  padding-top: 0.55rem; padding-bottom: 0.55rem;
+}
+.nav-logo { display: flex; align-items: center; gap: 0.7rem; }
+.nav-logo-icon {
+  width: 42px; height: 42px;
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+}
+.nav-logo-icon img { width: 100%; height: 100%; }
+.nav-logo-text { line-height: 1.2; }
+.nav-logo-text strong {
+  display: block; font-family: 'Newsreader', serif;
+  font-size: 0.95rem; font-weight: 600; letter-spacing: 0.02em;
+}
+.nav-logo-text span {
+  font-size: 0.68rem; color: var(--muted);
+  letter-spacing: 0.12em; text-transform: uppercase;
+}
+.nav-links { display: flex; gap: 2.2rem; list-style: none; align-items: center; }
+.nav-links a {
+  font-size: 0.88rem; letter-spacing: 0;
+  color: var(--muted);
+  transition: color 0.2s; font-weight: 500;
+}
+.nav-links a:hover { color: var(--text); }
+.nav-cta {
+  background: var(--accent); color: #fff !important;
+  padding: 0.5rem 1.2rem; border-radius: 100px;
+  font-weight: 500 !important; transition: background 0.2s, transform 0.15s !important;
+}
+.nav-cta:hover { background: #1c9bdb !important; transform: translateY(-1px); }
+.lang-switch {
+  display: flex; gap: 0.25rem;
+  background: rgba(255,255,255,0.06); border: 1px solid var(--border);
+  border-radius: 100px; padding: 0.2rem; flex-shrink: 0;
+}
+.lang-switch button {
+  background: transparent; border: none; color: var(--muted);
+  font-family: 'Inter', sans-serif; font-size: 0.72rem; font-weight: 600;
+  letter-spacing: 0.04em; padding: 0.32rem 0.7rem; border-radius: 100px;
+  cursor: pointer; transition: background 0.2s, color 0.2s;
+}
+.lang-switch button.active { background: var(--accent); color: #04151f; }
+.lang-switch button:not(.active):hover { color: var(--text); }
+.lang-switch.mobile { margin-top: 0.4rem; align-self: flex-start; }
+.hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: 6px; }
+.hamburger span { width: 22px; height: 2px; background: var(--text); border-radius: 2px; transition: all 0.3s; }
+.mobile-menu {
+  display: none; position: fixed; top: 70px; left: 0; right: 0; z-index: 199;
+  background: rgba(10,10,10,0.97); backdrop-filter: blur(14px);
+  padding: 1.5rem 2rem;
+  border-bottom: 1px solid var(--border);
+  flex-direction: column; gap: 1rem;
+}
+.mobile-menu.open { display: flex; }
+.mobile-menu a {
+  font-size: 0.9rem; font-weight: 600; color: var(--muted);
+  letter-spacing: 0.08em; text-transform: uppercase;
+  padding: 0.6rem 0; border-bottom: 1px solid var(--border);
+  transition: color 0.2s;
+}
+.mobile-menu a:hover { color: var(--text); }
+.mobile-menu .m-cta {
+  background: var(--accent); color: #fff; text-align: center;
+  padding: 0.8rem; border-radius: 100px; border: none;
+}
+
+/* ===== HERO (diaporama de photos réelles, une à la fois, 30s chacune) ===== */
+#hero {
+  position: relative; width: 100%; min-height: 100vh;
+  display: flex; align-items: center; justify-content: center;
+  background: #000; overflow: hidden;
+}
+.hero-slideshow { position: absolute; inset: 0; z-index: 0; overflow: hidden; }
+.hero-slide {
+  position: absolute; inset: 0;
+  background-size: cover; background-position: center;
+  opacity: 0; transition: opacity 1.8s ease;
+}
+.hero-slide.active { opacity: 1; }
+.hero-dark-overlay {
+  position: absolute; inset: 0; z-index: 2; pointer-events: none;
+  background: radial-gradient(ellipse 60% 55% at 50% 42%, rgba(0,0,0,0.72) 0%, rgba(0,0,0,0.6) 45%, rgba(0,0,0,0.5) 70%, rgba(0,0,0,0.82) 100%);
+}
+.hero-content {
+  position: relative; z-index: 10;
+  text-align: center; padding: 8rem 2rem 3rem;
+  max-width: 900px; margin: 0 auto;
+}
+.hero-badge {
+  display: inline-flex; align-items: center; gap: 0.5rem;
+  background: rgba(56,189,248,0.2);
+  border: 1px solid rgba(56,189,248,0.4);
+  color: var(--brick-light); font-size: 0.72rem;
+  letter-spacing: 0.18em; text-transform: uppercase;
+  padding: 0.42rem 1rem; border-radius: 100px; margin-bottom: 1.5rem;
+  font-family: 'Inter', sans-serif; font-weight: 500;
+  backdrop-filter: blur(4px);
+}
+.hero-badge::before { content: ''; width: 7px; height: 7px; border-radius: 50%; background: var(--accent); animation: pulse 1.8s infinite; }
+@keyframes pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:0.5;transform:scale(0.7)} }
+.hero-title {
+  font-family: 'Newsreader', serif;
+  font-size: clamp(3rem, 7vw, 6rem);
+  font-weight: 500; line-height: 1.05;
+  margin-bottom: 0.15rem;
+  letter-spacing: -0.01em;
+}
+.hero-title-line {
+  display: block;
+  background-clip: text; -webkit-background-clip: text;
+  color: transparent; -webkit-text-fill-color: transparent;
+  filter: drop-shadow(0 4px 24px rgba(0,0,0,0.6));
+}
+.hero-title-line.l1 { background-image: linear-gradient(90deg, var(--brick-light), #cdf1ff, var(--brick-light)); font-style: italic; }
+.hero-title-line.l2 { background-image: linear-gradient(90deg, #cdf1ff, var(--accent), var(--brick-dark)); }
+.hero-subtitle {
+  max-width: 640px; margin: 1.5rem auto 0;
+  color: rgba(222,238,248,0.88); font-size: 1.05rem; line-height: 1.7; font-weight: 300;
+}
+.hero-btns { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; margin-top: 2.2rem; }
+/* Bouton animé (inspiré de animated-generate-button-shadcn-tailwind, en CSS pur) */
+.btn-primary {
+  position: relative; isolation: isolate;
+  background: linear-gradient(90deg, var(--brick-light), #4fd1ff);
+  color: #04151f;
+  padding: 0.85rem 1.8rem; border: none; border-radius: 100px;
+  font-family: 'Inter', sans-serif; font-size: 0.95rem;
+  font-weight: 600; letter-spacing: 0; text-transform: none;
+  cursor: pointer;
+  box-shadow: inset 0 1px 1px rgba(255,255,255,0.5), inset 0 -6px 10px rgba(0,0,0,0.12);
+  transition: transform 0.25s, box-shadow 0.25s;
+}
+.btn-primary::after {
+  content: ''; position: absolute; inset: -5px; z-index: -1; border-radius: inherit;
+  background: linear-gradient(90deg, var(--accent), #cdf1ff, var(--accent));
+  opacity: 0; filter: blur(10px);
+  transition: opacity 0.35s;
+}
+.btn-primary:hover { transform: scale(1.045); box-shadow: inset 0 1px 1px rgba(255,255,255,0.6), inset 0 -6px 10px rgba(0,0,0,0.12), 0 10px 30px rgba(56,189,248,0.35); }
+.btn-primary:hover::after { opacity: 0.75; }
+.btn-primary:active { transform: scale(0.98); }
+.btn-outline {
+  position: relative;
+  background: rgba(0,0,0,0.4); color: var(--text);
+  padding: 0.75rem 1.6rem;
+  border: 1px solid rgba(255,255,255,0.25); border-radius: 100px;
+  font-family: 'Inter', sans-serif; font-size: 0.9rem;
+  font-weight: 500; letter-spacing: 0; text-transform: none;
+  cursor: pointer; transition: color 0.2s, transform 0.15s, border-color 0.2s, box-shadow 0.25s;
+  backdrop-filter: blur(4px);
+}
+.btn-outline:hover { color: var(--text); transform: translateY(-1px); border-color: rgba(56,189,248,0.55); box-shadow: 0 0 24px rgba(56,189,248,0.2); }
+.material-indicators {
+  display: inline-flex; gap: 2rem; justify-content: center; flex-wrap: wrap; margin-top: 2.6rem;
+  background: rgba(255,255,255,0.045); border: 1px solid var(--border);
+  padding: 0.9rem 1.8rem; border-radius: 100px; backdrop-filter: blur(6px);
+}
+.mat-ind {
+  display: flex; align-items: center; gap: 0.55rem;
+  font-size: 0.72rem; color: rgba(255,255,255,0.75);
+  letter-spacing: 0.1em; text-transform: uppercase;
+  font-family: 'Inter', sans-serif; font-weight: 500;
+  text-shadow: 0 2px 10px rgba(0,0,0,0.85);
+}
+.mat-ind::before { content: ''; width: 5px; height: 5px; border-radius: 50%; background: var(--accent); flex-shrink: 0; }
+
+/* ---- Animations d'entrée du hero ---- */
+@keyframes fade-in-down { from { opacity: 0; transform: translateY(-16px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes fade-in-up { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: translateY(0); } }
+.animate-fade-in-down { animation: fade-in-down 0.7s ease-out forwards; }
+.animate-fade-in-up { animation: fade-in-up 0.7s ease-out forwards; opacity: 0; }
+.delay-1 { animation-delay: 0.15s; }
+.delay-2 { animation-delay: 0.3s; }
+.delay-3 { animation-delay: 0.45s; }
+.delay-4 { animation-delay: 0.6s; }
+
+/* ---- Bandeau de confiance (InfiniteSlider + ProgressiveBlur, en CSS pur) ---- */
+.trust-strip { background: #000; padding: 2.2rem 0; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+.trust-strip-inner {
+  display: flex; align-items: center; gap: 2.5rem;
+  max-width: 1240px; margin: 0 auto; padding: 0 2rem;
+}
+.trust-label {
+  flex-shrink: 0; font-size: 0.85rem; color: var(--muted);
+  border-right: 1px solid var(--border); padding-right: 2rem;
+  max-width: 11rem; text-align: right;
+}
+.trust-track-wrap { position: relative; overflow: hidden; flex: 1; min-width: 0; }
+.trust-track {
+  display: flex; gap: 3.5rem; width: max-content;
+  animation: trust-scroll 32s linear infinite;
+}
+.trust-track-wrap:hover .trust-track { animation-play-state: paused; }
+.trust-track span {
+  font-family: 'Inter', sans-serif; font-size: 0.82rem; font-weight: 500;
+  letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted);
+  white-space: nowrap; display: flex; align-items: center; gap: 0.5rem;
+}
+.trust-track span::before { content: '◆'; color: var(--accent); font-size: 0.55rem; }
+@keyframes trust-scroll { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+.trust-blur-edge {
+  position: absolute; top: 0; bottom: 0; width: 90px; z-index: 2; pointer-events: none;
+  backdrop-filter: blur(6px);
+}
+.trust-blur-edge.left { left: 0; -webkit-mask-image: linear-gradient(to right, black, transparent); mask-image: linear-gradient(to right, black, transparent); }
+.trust-blur-edge.right { right: 0; -webkit-mask-image: linear-gradient(to left, black, transparent); mask-image: linear-gradient(to left, black, transparent); }
+
+/* ===== SECTION LAYOUT ===== */
+section { padding: 6rem 2rem; }
+.container { max-width: 1200px; margin: 0 auto; }
+.section-tag {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.75rem; letter-spacing: 0.1em;
+  text-transform: uppercase; color: var(--accent);
+  margin-bottom: 0.7rem; font-weight: 500;
+}
+.section-title {
+  font-family: 'Newsreader', serif;
+  font-size: clamp(2rem, 3.4vw, 3rem);
+  font-weight: 500; margin-bottom: 1rem; line-height: 1.15;
+  letter-spacing: -0.01em;
+}
+.section-sub { color: var(--muted); line-height: 1.75; max-width: 580px; font-size: 0.95rem; }
+
+/* ===== SERVICES (un bloc détaillé par catégorie, texte + photo) ===== */
+#services { background: var(--dark2); }
+.services-intro { margin-bottom: 4rem; max-width: 720px; }
+.service-row {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 3.5rem; align-items: center;
+  padding: 3.5rem 0; border-bottom: 1px solid var(--border);
+}
+.service-row:last-child { border-bottom: none; padding-bottom: 0; }
+.service-row:first-child { padding-top: 0; }
+.service-row.reverse .service-media { order: 2; }
+.service-row.reverse .service-text { order: 1; }
+.service-media {
+  border-radius: 14px; overflow: hidden; border: 1px solid var(--border);
+  aspect-ratio: 4 / 3; background: var(--dark3);
+}
+.service-media img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.service-num {
+  font-family: 'Newsreader', serif; font-style: italic; color: var(--accent);
+  font-size: 0.95rem; margin-bottom: 0.6rem; opacity: 0.85;
+}
+.service-text h3 {
+  font-family: 'Newsreader', serif; font-weight: 500;
+  font-size: clamp(1.5rem, 2.4vw, 2rem); letter-spacing: -0.01em;
+  margin-bottom: 0.9rem; line-height: 1.2;
+}
+.service-text p {
+  color: var(--muted); line-height: 1.8; font-size: 0.95rem; margin-bottom: 1rem;
+}
+.service-tags { display: flex; flex-wrap: wrap; gap: 0.6rem; margin-top: 1.2rem; }
+.service-tags span {
+  font-size: 0.72rem; font-family: 'Inter', sans-serif; font-weight: 600;
+  letter-spacing: 0.06em; text-transform: uppercase; color: var(--accent);
+  background: rgba(56,189,248,0.1); border: 1px solid rgba(56,189,248,0.2);
+  padding: 0.3rem 0.75rem; border-radius: 100px;
+}
+
+/* ===== CONTACT ===== */
+#contact { background: var(--dark2); }
+.contact-head { margin-bottom: 2.5rem; }
+.contact-grid { display: grid; grid-template-columns: 1fr 1.5fr; gap: 2rem; align-items: start; }
+.contact-panel {
+  background: var(--dark3); border: 1px solid var(--border);
+  border-radius: 14px; padding: 2rem;
+}
+.contact-info { display: flex; flex-direction: column; gap: 1.8rem; }
+.contact-card { display: flex; align-items: flex-start; gap: 1rem; }
+.contact-icon {
+  width: 46px; height: 46px; flex-shrink: 0;
+  background: rgba(56,189,248,0.1); border-radius: 10px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1.3rem; border: 1px solid rgba(56,189,248,0.18);
+}
+.contact-lbl {
+  font-size: 0.7rem; color: var(--muted);
+  text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 0.25rem;
+  font-family: 'Inter', sans-serif; font-weight: 600;
+}
+.contact-val { font-size: 0.95rem; font-weight: 500; }
+.contact-val a { color: var(--text); transition: color 0.2s; }
+.contact-val a:hover { color: var(--accent); }
+.contact-form { display: flex; flex-direction: column; gap: 1rem; }
+.form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+.fg { display: flex; flex-direction: column; gap: 0.4rem; }
+.fg label {
+  font-size: 0.75rem; color: var(--muted);
+  font-family: 'Inter', sans-serif; font-weight: 500;
+  letter-spacing: 0.04em; text-transform: uppercase;
+}
+.fg input, .fg select, .fg textarea {
+  background: var(--dark3); border: 1px solid rgba(255,255,255,0.1);
+  color: var(--text); padding: 0.78rem 1rem; border-radius: 7px;
+  font-size: 0.9rem; font-family: 'Inter', sans-serif;
+  transition: border-color 0.2s; outline: none;
+  appearance: none;
+}
+.fg input::placeholder, .fg textarea::placeholder { color: var(--muted); }
+.fg input:focus, .fg select:focus, .fg textarea:focus { border-color: var(--accent); }
+.fg textarea { resize: vertical; min-height: 130px; }
+.fg select { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' fill='none'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23888' stroke-width='1.5' stroke-linecap='round'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 1rem center; padding-right: 2.5rem; }
+.fg select option { background: #1f1f1f; }
+.form-note { font-size: 0.78rem; color: var(--muted); }
+.form-success {
+  display: none; background: rgba(34,197,94,0.1); border: 1px solid rgba(34,197,94,0.25);
+  border-radius: 7px; padding: 1rem; color: #4ade80; font-size: 0.875rem; text-align: center;
+}
+
+/* ===== FOOTER ===== */
+footer { background: #080808; padding: 3.5rem 2rem 1.5rem; border-top: 1px solid var(--border); }
+.footer-top {
+  max-width: 1200px; margin: 0 auto;
+  display: grid; grid-template-columns: 1.6fr 1fr 1fr; gap: 3rem;
+  padding-bottom: 3rem; border-bottom: 1px solid var(--border);
+}
+.footer-logo { display: flex; align-items: center; gap: 0.7rem; margin-bottom: 0.9rem; }
+.footer-logo-icon { width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; }
+.footer-logo-icon img { width: 100%; height: 100%; }
+.footer-logo-text strong { display: block; font-family: 'Newsreader', serif; font-size: 0.9rem; font-weight: 600; }
+.footer-logo-text span { font-size: 0.65rem; color: var(--muted); letter-spacing: 0.1em; text-transform: uppercase; }
+footer p.footer-desc { font-size: 0.85rem; color: var(--muted); line-height: 1.7; max-width: 280px; margin-bottom: 1.3rem; }
+.footer-col-title {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.7rem; font-weight: 600; letter-spacing: 0.1em;
+  text-transform: uppercase; color: var(--muted); margin-bottom: 1.1rem;
+}
+.footer-links { list-style: none; display: flex; flex-direction: column; gap: 0.55rem; }
+.footer-links a { font-size: 0.875rem; color: var(--muted); transition: color 0.2s; }
+.footer-links a:hover { color: var(--text); }
+.footer-bottom {
+  max-width: 1200px; margin: 1.5rem auto 0;
+  display: flex; justify-content: space-between; align-items: center;
+  font-size: 0.78rem; color: var(--muted); flex-wrap: wrap; gap: 0.5rem;
+}
+
+/* ===== DIVIDERS ===== */
+.divider { width: 48px; height: 3px; background: var(--accent); border-radius: 2px; margin: 1.2rem 0; }
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 960px) {
+  .contact-grid { grid-template-columns: 1fr; gap: 1.5rem; }
+  .footer-top { grid-template-columns: 1fr 1fr; }
+  .footer-top > :first-child { grid-column: 1 / -1; }
+  .service-row, .service-row.reverse { grid-template-columns: 1fr; gap: 1.5rem; }
+  .service-row .service-media, .service-row.reverse .service-media { order: 1; }
+  .service-row .service-text, .service-row.reverse .service-text { order: 2; }
+}
+@media (max-width: 960px) {
+  .nav-inner { padding: 0.65rem 1.1rem; border-radius: 24px; }
+  .nav-links { display: none; }
+  .hamburger { display: flex; }
+  .footer-top { grid-template-columns: 1fr; }
+  .form-row { grid-template-columns: 1fr; }
+  .material-indicators { gap: 1rem; }
+  .mat-ind { font-size: 0.65rem; }
+  section { padding: 4rem 1.2rem; }
+  .contact-panel { padding: 1.5rem; }
+  .trust-strip-inner { flex-direction: column; align-items: flex-start; gap: 1rem; padding: 0 1.2rem; }
+  .trust-label { border-right: none; text-align: left; max-width: none; padding-right: 0; }
+}
+</style>
+</head>
+<body>
+
+<!-- ===== NAV ===== -->
+<nav>
+  <div class="nav-inner">
+    <a href="#hero" class="nav-logo">
+      <div class="nav-logo-icon"><img src="assets/brand/logo-atlas-nord.svg" alt="Atlas Nord"></div>
+      <div class="nav-logo-text">
+        <strong>Atlas Nord</strong>
+        <span data-i18n="brand.tagline">Construction Générale</span>
+      </div>
+    </a>
+    <ul class="nav-links">
+      <li><a href="#services" data-i18n="nav.services">Services</a></li>
+      <li><a href="#apropos" data-i18n="nav.apropos">Qui sommes-nous</a></li>
+      <li><a href="#realisations" data-i18n="nav.realisations">Réalisations</a></li>
+      <li><a href="#zone" data-i18n="nav.zone">Zone de service</a></li>
+      <li><a href="#contact" class="nav-cta" data-i18n="nav.cta">Soumission gratuite</a></li>
+      <li>
+        <div class="lang-switch" id="langSwitch">
+          <button type="button" data-lang="fr" class="active">FR</button>
+          <button type="button" data-lang="en">EN</button>
+        </div>
+      </li>
+    </ul>
+    <div class="hamburger" onclick="toggleMenu()" id="hamburger">
+      <span></span><span></span><span></span>
+    </div>
+  </div>
+</nav>
+<div class="mobile-menu" id="mobileMenu">
+  <a href="#services" onclick="closeMenu()" data-i18n="nav.services">Services</a>
+  <a href="#apropos" onclick="closeMenu()" data-i18n="nav.apropos">Qui sommes-nous</a>
+  <a href="#realisations" onclick="closeMenu()" data-i18n="nav.realisations">Réalisations</a>
+  <a href="#zone" onclick="closeMenu()" data-i18n="nav.zone">Zone de service</a>
+  <a href="#contact" class="m-cta" onclick="closeMenu()" data-i18n="nav.cta">Soumission gratuite</a>
+  <div class="lang-switch mobile" id="langSwitchMobile">
+    <button type="button" data-lang="fr" class="active">FR</button>
+    <button type="button" data-lang="en">EN</button>
+  </div>
+</div>
+
+<!-- ===== HERO (diaporama de photos de chantier, 30s chacune) ===== -->
+<section id="hero">
+  <div class="hero-slideshow" id="heroSlideshow" role="img" aria-label="Photos de chantiers de construction">
+    <div class="hero-slide active" style="background-image:url('https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=1600&q=80&auto=format&fit=crop')"></div>
+    <div class="hero-slide" style="background-image:url('https://images.unsplash.com/photo-1429497419816-9ca5cfb4571a?w=1600&q=80&auto=format&fit=crop')"></div>
+    <div class="hero-slide" style="background-image:url('https://images.unsplash.com/photo-1542350880924-09225f70e026?w=1600&q=80&auto=format&fit=crop')"></div>
+    <div class="hero-slide" style="background-image:url('https://images.unsplash.com/photo-1688742231135-f3c4acd4fe33?w=1600&q=80&auto=format&fit=crop')"></div>
+    <div class="hero-slide" style="background-image:url('https://images.unsplash.com/photo-1530877872966-40bb5529f558?w=1600&q=80&auto=format&fit=crop')"></div>
+    <div class="hero-slide" style="background-image:url('https://images.unsplash.com/photo-1562324771-4fb277001e1a?w=1600&q=80&auto=format&fit=crop')"></div>
+    <div class="hero-slide" style="background-image:url('https://images.unsplash.com/photo-1758574697284-8e84046a45ae?w=1600&q=80&auto=format&fit=crop')"></div>
+    <div class="hero-slide" style="background-image:url('https://images.unsplash.com/photo-1665236570466-2582e23a4025?w=1600&q=80&auto=format&fit=crop')"></div>
+    <div class="hero-slide" style="background-image:url('https://images.unsplash.com/photo-1541888946425-d81bb19240f5?w=1600&q=80&auto=format&fit=crop')"></div>
+    <div class="hero-slide" style="background-image:url('https://images.unsplash.com/photo-1561910732-7c42b223eb9c?w=1600&q=80&auto=format&fit=crop')"></div>
+  </div>
+  <div class="hero-dark-overlay"></div>
+  <div class="hero-content">
+    <div class="hero-badge animate-fade-in-down" data-i18n="hero.badge">Certifiés RBQ</div>
+    <h1 class="hero-title">
+      <span class="hero-title-line l1 animate-fade-in-up delay-1" data-i18n="hero.title1">Construisons</span>
+      <span class="hero-title-line l2 animate-fade-in-up delay-2" data-i18n="hero.title2">votre projet</span>
+    </h1>
+    <p class="hero-subtitle animate-fade-in-up delay-3" data-i18n="hero.subtitle">Entrepreneurs généraux en construction à Montréal : construction neuve, rénovation et maçonnerie, du premier plan jusqu'à la remise des clés.</p>
+    <div class="hero-btns animate-fade-in-up delay-4">
+      <a href="#contact" class="btn-primary" data-i18n="hero.btnPrimary">Demande de soumission</a>
+      <a href="#services" class="btn-outline" data-i18n="hero.btnSecondary">Nos services</a>
+    </div>
+    <div class="material-indicators animate-fade-in-up delay-4">
+      <div class="mat-ind"><span data-i18n="mat.residential">Résidentiel</span></div>
+      <div class="mat-ind"><span data-i18n="mat.commercial">Commercial</span></div>
+      <div class="mat-ind"><span data-i18n="mat.renovation">Rénovation</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== BANDEAU DE CONFIANCE ===== -->
+<div class="trust-strip">
+  <div class="trust-strip-inner">
+    <p class="trust-label" data-i18n="trust.label">Une entreprise reconnue</p>
+    <div class="trust-track-wrap">
+      <div class="trust-track">
+        <span>RBQ 5830-2126-01</span>
+        <span data-i18n="trust.exp">+10 ans d'expérience</span>
+        <span data-i18n="trust.general">Construction générale</span>
+        <span>Montréal</span>
+        <span>Laval</span>
+        <span>Longueuil</span>
+        <span data-i18n="trust.southshore">Rive-Sud</span>
+        <span data-i18n="nav.cta">Soumission gratuite</span>
+        <span>RBQ 5830-2126-01</span>
+        <span data-i18n="trust.exp">+10 ans d'expérience</span>
+        <span data-i18n="trust.general">Construction générale</span>
+        <span>Montréal</span>
+        <span>Laval</span>
+        <span>Longueuil</span>
+        <span data-i18n="trust.southshore">Rive-Sud</span>
+        <span data-i18n="nav.cta">Soumission gratuite</span>
+      </div>
+      <div class="trust-blur-edge left"></div>
+      <div class="trust-blur-edge right"></div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== SERVICES ===== -->
+<section id="services">
+  <div class="container">
+    <div class="services-intro">
+      <div class="section-tag" data-i18n="services.tag">Ce que nous faisons</div>
+      <h2 class="section-title" data-i18n="services.title">Entrepreneurs généraux en construction</h2>
+      <div class="divider"></div>
+      <p class="section-sub" data-i18n="services.sub">Nous sommes des entrepreneurs généraux : nous prenons en charge chaque catégorie de travaux ci-dessous, de la planification jusqu'à la livraison, avec nos propres équipes ou des sous-traitants de confiance que nous coordonnons directement.</p>
+    </div>
+
+    <div class="service-row">
+      <div class="service-media">
+        <img src="https://images.unsplash.com/photo-1505320952499-94d07ea84691?w=1200&q=80&auto=format&fit=crop" loading="lazy" alt="Chantier de construction neuve, grue au crépuscule">
+      </div>
+      <div class="service-text">
+        <div class="service-num">01</div>
+        <h3 data-i18n="svc1.title">Construction neuve</h3>
+        <p data-i18n="svc1.text">Nous prenons en charge vos projets de construction neuve de A à Z : excavation et fondations, structure, charpente, enveloppe du bâtiment et finition intérieure. Que ce soit pour une résidence unifamiliale, un multilogement ou un bâtiment commercial, nous coordonnons les plans, les corps de métier et les inspections pour livrer un bâtiment conforme aux codes du bâtiment du Québec, dans les délais convenus.</p>
+        <div class="service-tags"><span data-i18n="mat.residential">Résidentiel</span><span data-i18n="mat.commercial">Commercial</span><span data-i18n="svc1.tag3">Clé en main</span></div>
+      </div>
+    </div>
+
+    <div class="service-row reverse">
+      <div class="service-media">
+        <img src="https://images.unsplash.com/photo-1556912167-f556f1f39fdf?w=1200&q=80&auto=format&fit=crop" loading="lazy" alt="Rénovation résidentielle, cuisine moderne rénovée">
+      </div>
+      <div class="service-text">
+        <div class="service-num">02</div>
+        <h3 data-i18n="svc2.title">Rénovation résidentielle</h3>
+        <p data-i18n="svc2.text">Cuisines, salles de bain, sous-sols, agencements ouverts ou rénovations majeures complètes : nous transformons votre résidence en respectant votre budget, votre échéancier et votre quotidien pendant les travaux. Nous nous occupons de la démolition, de la plomberie et de l'électricité (via nos partenaires licenciés), jusqu'aux finitions et à la peinture.</p>
+        <div class="service-tags"><span data-i18n="svc2.tag1">Cuisines</span><span data-i18n="svc2.tag2">Salles de bain</span><span data-i18n="svc2.tag3">Sous-sols</span></div>
+      </div>
+    </div>
+
+    <div class="service-row">
+      <div class="service-media">
+        <img src="https://images.unsplash.com/photo-1497366216548-37526070297c?w=1200&q=80&auto=format&fit=crop" loading="lazy" alt="Aménagement de locaux commerciaux et bureaux">
+      </div>
+      <div class="service-text">
+        <div class="service-num">03</div>
+        <h3 data-i18n="svc3.title">Rénovation commerciale</h3>
+        <p data-i18n="svc3.text">Aménagement et rénovation de locaux commerciaux, bureaux et immeubles à revenus, en minimisant les interruptions pour vos opérations ou vos locataires. Nous travaillons avec précision sur les échéanciers et le respect des normes commerciales (accessibilité, protection incendie, ventilation), en coordination avec vos gestionnaires d'immeuble.</p>
+        <div class="service-tags"><span data-i18n="svc3.tag1">Bureaux</span><span data-i18n="svc3.tag2">Commerces</span><span data-i18n="svc3.tag3">Immeubles à revenus</span></div>
+      </div>
+    </div>
+
+    <div class="service-row reverse">
+      <div class="service-media">
+        <img src="https://images.unsplash.com/photo-1612935089040-89195ef54677?w=1200&q=80&auto=format&fit=crop" loading="lazy" alt="Agrandissement et ajout d'étage sur une résidence">
+      </div>
+      <div class="service-text">
+        <div class="service-num">04</div>
+        <h3 data-i18n="svc4.title">Agrandissement</h3>
+        <p data-i18n="svc4.text">Agrandissement au sol, ajout d'étage ou extension arrière : nous intégrons la nouvelle construction à votre bâtiment existant en respectant son intégrité structurelle et architecturale. Cela inclut l'analyse structurelle, les demandes de permis auprès de la municipalité et l'arrimage des finitions avec l'existant pour un résultat homogène.</p>
+        <div class="service-tags"><span data-i18n="svc4.tag1">Ajout d'étage</span><span data-i18n="svc4.tag2">Extension</span><span data-i18n="svc4.tag3">Permis municipaux</span></div>
+      </div>
+    </div>
+
+    <div class="service-row">
+      <div class="service-media">
+        <img src="https://images.unsplash.com/photo-1609433126729-535bd3e0b4f6?w=1200&q=80&auto=format&fit=crop" loading="lazy" alt="Travaux de maçonnerie traditionnelle en brique">
+      </div>
+      <div class="service-text">
+        <div class="service-num">05</div>
+        <h3 data-i18n="svc5.title">Maçonnerie & restauration</h3>
+        <p data-i18n="svc5.text">Réparation et restauration de bâtiments en brique et en pierre : rejointoiement, remplacement d'unités endommagées, reconstruction de murs et travaux de maçonnerie traditionnelle. Nous avons notamment reconstruit un mur en pierre selon la technique « Crazy Work » avec un appareillage en bâton rompu, en respectant les méthodes d'origine du bâtiment.</p>
+        <div class="service-tags"><span data-i18n="svc5.tag1">Brique</span><span data-i18n="svc5.tag2">Pierre</span><span data-i18n="svc5.tag3">Rejointoiement</span></div>
+      </div>
+    </div>
+
+    <div class="service-row reverse">
+      <div class="service-media">
+        <img src="https://images.unsplash.com/photo-1542621334-a254cf47733d?w=1200&q=80&auto=format&fit=crop" loading="lazy" alt="Plans et gestion de projet de construction">
+      </div>
+      <div class="service-text">
+        <div class="service-num">06</div>
+        <h3 data-i18n="svc6.title">Gestion de projet</h3>
+        <p data-i18n="svc6.text">Coordination complète de vos travaux, du début à la fin : plans et devis, sélection et supervision des sous-traitants, échéanciers, budgets et suivi de chantier. Un seul point de contact chez Atlas Nord pour répondre à vos questions et vous tenir informé à chaque étape, avec une communication transparente sur l'avancement et les coûts.</p>
+        <div class="service-tags"><span data-i18n="svc6.tag1">Plans & devis</span><span data-i18n="svc6.tag2">Budgets</span><span data-i18n="svc6.tag3">Suivi de chantier</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== CONTACT ===== -->
+<section id="contact">
+  <div class="container">
+    <div class="contact-head">
+      <div class="section-tag" data-i18n="contact.tag">Contactez-nous</div>
+      <h2 class="section-title" data-i18n="contact.title">Prêt pour votre projet ?</h2>
+      <div class="divider"></div>
+      <p class="section-sub" data-i18n="contact.sub">Demandez votre soumission gratuite. Nous vous répondons dans les 24h.</p>
+    </div>
+    <div class="contact-grid">
+      <div class="contact-panel">
+        <div class="contact-info">
+          <div class="contact-card">
+            <div class="contact-icon">📞</div>
+            <div>
+              <div class="contact-lbl" data-i18n="label.phone">Téléphone</div>
+              <div class="contact-val"><a href="tel:+15144311433">(514) 431-1433</a></div>
+            </div>
+          </div>
+          <div class="contact-card">
+            <div class="contact-icon">✉️</div>
+            <div>
+              <div class="contact-lbl" data-i18n="label.email">Courriel</div>
+              <div class="contact-val"><a href="mailto:info@atlasnord.ca">info@atlasnord.ca</a></div>
+            </div>
+          </div>
+          <div class="contact-card">
+            <div class="contact-icon">📍</div>
+            <div>
+              <div class="contact-lbl" data-i18n="contact.sectorLbl">Secteur principal</div>
+              <div class="contact-val">Westmount · Montréal, QC</div>
+            </div>
+          </div>
+          <div class="contact-card">
+            <div class="contact-icon">⏰</div>
+            <div>
+              <div class="contact-lbl" data-i18n="contact.availLbl">Disponibilité</div>
+              <div class="contact-val" data-i18n="contact.availVal">Lun–Ven : 7h00–18h00</div>
+            </div>
+          </div>
+          <div class="contact-card">
+            <div class="contact-icon">🪪</div>
+            <div>
+              <div class="contact-lbl" data-i18n="contact.licenseLbl">Licence RBQ</div>
+              <div class="contact-val">5830-2126-01</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="contact-panel">
+        <form class="contact-form" onsubmit="submitForm(event)">
+          <div class="form-row">
+            <div class="fg">
+              <label data-i18n="form.firstname">Prénom</label>
+              <input type="text" placeholder="Jean" data-i18n-placeholder="ph.firstname" required>
+            </div>
+            <div class="fg">
+              <label data-i18n="form.lastname">Nom</label>
+              <input type="text" placeholder="Tremblay" data-i18n-placeholder="ph.lastname" required>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="fg">
+              <label data-i18n="label.phone">Téléphone</label>
+              <input type="tel" placeholder="(514) 000-0000" required>
+            </div>
+            <div class="fg">
+              <label data-i18n="label.email">Courriel</label>
+              <input type="email" placeholder="jean@exemple.com" data-i18n-placeholder="ph.email" required>
+            </div>
+          </div>
+          <div class="fg">
+            <label data-i18n="form.serviceType">Type de service</label>
+            <select required>
+              <option value="" disabled selected data-i18n="form.selectPlaceholder">Sélectionnez un service</option>
+              <option data-i18n="svc1.title">Construction neuve</option>
+              <option data-i18n="svc2.title">Rénovation résidentielle</option>
+              <option data-i18n="svc3.title">Rénovation commerciale</option>
+              <option data-i18n="svc4.title">Agrandissement</option>
+              <option data-i18n="svc5.title">Maçonnerie & restauration</option>
+              <option data-i18n="svc6.title">Gestion de projet</option>
+              <option data-i18n="form.other">Autre</option>
+            </select>
+          </div>
+          <div class="fg">
+            <label data-i18n="form.address">Adresse des travaux</label>
+            <input type="text" placeholder="123 Rue Sherbrooke, Westmount, QC">
+          </div>
+          <div class="fg">
+            <label data-i18n="form.desc">Description du projet</label>
+            <textarea placeholder="Décrivez votre projet (dimensions approximatives, état actuel, photos disponibles, etc.)" data-i18n-placeholder="ph.desc"></textarea>
+          </div>
+          <p class="form-note" data-i18n="form.note">Soumission 100% gratuite et sans engagement. Réponse sous 24h.</p>
+          <button type="submit" class="btn-primary" style="width:100%;padding:1rem" data-i18n="form.submit">Envoyer la demande</button>
+          <div class="form-success" id="formSuccess" data-i18n="form.success">✅ Merci ! Nous vous contacterons sous 24h.</div>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== FOOTER ===== -->
+<footer>
+  <div class="footer-top">
+    <div>
+      <div class="footer-logo">
+        <div class="footer-logo-icon"><img src="assets/brand/logo-atlas-nord.svg" alt="Atlas Nord"></div>
+        <div class="footer-logo-text">
+          <strong>Atlas Nord</strong>
+          <span data-i18n="brand.tagline">Construction Générale</span>
+        </div>
+      </div>
+      <p class="footer-desc" data-i18n="footer.desc">Entrepreneurs en construction générale à Montréal. Construction neuve, rénovation et maçonnerie — nous bâtissons et restaurons avec passion et précision depuis plus de 10 ans.</p>
+    </div>
+    <div>
+      <div class="footer-col-title" data-i18n="footer.navTitle">Navigation</div>
+      <ul class="footer-links">
+        <li><a href="#services" data-i18n="nav.services">Services</a></li>
+        <li><a href="#apropos" data-i18n="nav.apropos">Qui sommes-nous</a></li>
+        <li><a href="#realisations" data-i18n="nav.realisations">Réalisations</a></li>
+        <li><a href="#zone" data-i18n="nav.zone">Zone de service</a></li>
+        <li><a href="#contact" data-i18n="footer.contact">Contact</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="footer-col-title" data-i18n="footer.servicesTitle">Services</div>
+      <ul class="footer-links">
+        <li><a href="#services" data-i18n="svc1.title">Construction neuve</a></li>
+        <li><a href="#services" data-i18n="svc2.title">Rénovation résidentielle</a></li>
+        <li><a href="#services" data-i18n="svc3.title">Rénovation commerciale</a></li>
+        <li><a href="#services" data-i18n="svc4.title">Agrandissement</a></li>
+        <li><a href="#services" data-i18n="svc5.title">Maçonnerie & restauration</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span data-i18n="footer.rights">© 2025 Atlas Nord. Tous droits réservés. — RBQ : 5830-2126-01</span>
+    <span>(514) 431-1433 · info@atlasnord.ca · Montréal, Québec, Canada</span>
+  </div>
+</footer>
+
+<!-- ===== SCRIPTS ===== -->
+<script>
+/* =============================================
+   TRADUCTION FR / EN (bascule client, comme sur lcpfabrication.ca)
+============================================= */
+const I18N = {
+  fr: {
+    'brand.tagline': 'Construction Générale',
+    'nav.services': 'Services',
+    'nav.apropos': 'Qui sommes-nous',
+    'nav.realisations': 'Réalisations',
+    'nav.zone': 'Zone de service',
+    'nav.cta': 'Soumission gratuite',
+    'hero.badge': 'Certifiés RBQ',
+    'hero.title1': 'Construisons',
+    'hero.title2': 'votre projet',
+    'hero.subtitle': "Entrepreneurs généraux en construction à Montréal : construction neuve, rénovation et maçonnerie, du premier plan jusqu'à la remise des clés.",
+    'hero.btnPrimary': 'Demande de soumission',
+    'hero.btnSecondary': 'Nos services',
+    'mat.residential': 'Résidentiel',
+    'mat.commercial': 'Commercial',
+    'mat.renovation': 'Rénovation',
+    'trust.label': 'Une entreprise reconnue',
+    'trust.exp': "+10 ans d'expérience",
+    'trust.general': 'Construction générale',
+    'trust.southshore': 'Rive-Sud',
+    'services.tag': 'Ce que nous faisons',
+    'services.title': 'Entrepreneurs généraux en construction',
+    'services.sub': "Nous sommes des entrepreneurs généraux : nous prenons en charge chaque catégorie de travaux ci-dessous, de la planification jusqu'à la livraison, avec nos propres équipes ou des sous-traitants de confiance que nous coordonnons directement.",
+    'svc1.title': 'Construction neuve',
+    'svc1.text': "Nous prenons en charge vos projets de construction neuve de A à Z : excavation et fondations, structure, charpente, enveloppe du bâtiment et finition intérieure. Que ce soit pour une résidence unifamiliale, un multilogement ou un bâtiment commercial, nous coordonnons les plans, les corps de métier et les inspections pour livrer un bâtiment conforme aux codes du bâtiment du Québec, dans les délais convenus.",
+    'svc1.tag3': 'Clé en main',
+    'svc2.title': 'Rénovation résidentielle',
+    'svc2.text': "Cuisines, salles de bain, sous-sols, agencements ouverts ou rénovations majeures complètes : nous transformons votre résidence en respectant votre budget, votre échéancier et votre quotidien pendant les travaux. Nous nous occupons de la démolition, de la plomberie et de l'électricité (via nos partenaires licenciés), jusqu'aux finitions et à la peinture.",
+    'svc2.tag1': 'Cuisines', 'svc2.tag2': 'Salles de bain', 'svc2.tag3': 'Sous-sols',
+    'svc3.title': 'Rénovation commerciale',
+    'svc3.text': "Aménagement et rénovation de locaux commerciaux, bureaux et immeubles à revenus, en minimisant les interruptions pour vos opérations ou vos locataires. Nous travaillons avec précision sur les échéanciers et le respect des normes commerciales (accessibilité, protection incendie, ventilation), en coordination avec vos gestionnaires d'immeuble.",
+    'svc3.tag1': 'Bureaux', 'svc3.tag2': 'Commerces', 'svc3.tag3': 'Immeubles à revenus',
+    'svc4.title': 'Agrandissement',
+    'svc4.text': "Agrandissement au sol, ajout d'étage ou extension arrière : nous intégrons la nouvelle construction à votre bâtiment existant en respectant son intégrité structurelle et architecturale. Cela inclut l'analyse structurelle, les demandes de permis auprès de la municipalité et l'arrimage des finitions avec l'existant pour un résultat homogène.",
+    'svc4.tag1': "Ajout d'étage", 'svc4.tag2': 'Extension', 'svc4.tag3': 'Permis municipaux',
+    'svc5.title': 'Maçonnerie & restauration',
+    'svc5.text': "Réparation et restauration de bâtiments en brique et en pierre : rejointoiement, remplacement d'unités endommagées, reconstruction de murs et travaux de maçonnerie traditionnelle. Nous avons notamment reconstruit un mur en pierre selon la technique « Crazy Work » avec un appareillage en bâton rompu, en respectant les méthodes d'origine du bâtiment.",
+    'svc5.tag1': 'Brique', 'svc5.tag2': 'Pierre', 'svc5.tag3': 'Rejointoiement',
+    'svc6.title': 'Gestion de projet',
+    'svc6.text': "Coordination complète de vos travaux, du début à la fin : plans et devis, sélection et supervision des sous-traitants, échéanciers, budgets et suivi de chantier. Un seul point de contact chez Atlas Nord pour répondre à vos questions et vous tenir informé à chaque étape, avec une communication transparente sur l'avancement et les coûts.",
+    'svc6.tag1': 'Plans & devis', 'svc6.tag2': 'Budgets', 'svc6.tag3': 'Suivi de chantier',
+    'contact.tag': 'Contactez-nous',
+    'contact.title': 'Prêt pour votre projet ?',
+    'contact.sub': 'Demandez votre soumission gratuite. Nous vous répondons dans les 24h.',
+    'contact.sectorLbl': 'Secteur principal',
+    'contact.availLbl': 'Disponibilité',
+    'contact.availVal': 'Lun–Ven : 7h00–18h00',
+    'contact.licenseLbl': 'Licence RBQ',
+    'label.phone': 'Téléphone',
+    'label.email': 'Courriel',
+    'form.firstname': 'Prénom',
+    'form.lastname': 'Nom',
+    'form.serviceType': 'Type de service',
+    'form.selectPlaceholder': 'Sélectionnez un service',
+    'form.other': 'Autre',
+    'form.address': 'Adresse des travaux',
+    'form.desc': 'Description du projet',
+    'form.note': 'Soumission 100% gratuite et sans engagement. Réponse sous 24h.',
+    'form.submit': 'Envoyer la demande',
+    'form.success': '✅ Merci ! Nous vous contacterons sous 24h.',
+    'ph.firstname': 'Jean', 'ph.lastname': 'Tremblay', 'ph.email': 'jean@exemple.com',
+    'ph.desc': 'Décrivez votre projet (dimensions approximatives, état actuel, photos disponibles, etc.)',
+    'footer.desc': 'Entrepreneurs en construction générale à Montréal. Construction neuve, rénovation et maçonnerie — nous bâtissons et restaurons avec passion et précision depuis plus de 10 ans.',
+    'footer.navTitle': 'Navigation',
+    'footer.servicesTitle': 'Services',
+    'footer.contact': 'Contact',
+    'footer.rights': '© 2025 Atlas Nord. Tous droits réservés. — RBQ : 5830-2126-01',
+    'meta.title': 'Atlas Nord | Construction Générale — Montréal',
+  },
+  en: {
+    'brand.tagline': 'General Construction',
+    'nav.services': 'Services',
+    'nav.apropos': 'About Us',
+    'nav.realisations': 'Our Work',
+    'nav.zone': 'Service Area',
+    'nav.cta': 'Free Quote',
+    'hero.badge': 'RBQ Certified',
+    'hero.title1': "Let's Build",
+    'hero.title2': 'Your Project',
+    'hero.subtitle': "General construction contractors in Montreal: new construction, renovation and masonry, from the first blueprint to the final handover.",
+    'hero.btnPrimary': 'Request a Quote',
+    'hero.btnSecondary': 'Our Services',
+    'mat.residential': 'Residential',
+    'mat.commercial': 'Commercial',
+    'mat.renovation': 'Renovation',
+    'trust.label': 'A Trusted Company',
+    'trust.exp': '+10 Years of Experience',
+    'trust.general': 'General Construction',
+    'trust.southshore': 'South Shore',
+    'services.tag': 'What We Do',
+    'services.title': 'General Construction Contractors',
+    'services.sub': "We are general contractors: we handle every category of work listed below, from planning through to delivery, with our own crews or trusted subcontractors that we coordinate directly.",
+    'svc1.title': 'New Construction',
+    'svc1.text': "We handle your new construction projects from A to Z: excavation and foundations, framing, structure, building envelope and interior finishing. Whether for a single-family home, a multi-unit building or a commercial building, we coordinate the plans, trades and inspections to deliver a building that meets Québec building codes, on the agreed schedule.",
+    'svc1.tag3': 'Turnkey',
+    'svc2.title': 'Residential Renovation',
+    'svc2.text': "Kitchens, bathrooms, basements, open-concept layouts or complete major renovations: we transform your home while respecting your budget, your schedule and your daily life during the work. We handle demolition, plumbing and electrical (through our licensed partners), all the way to finishes and painting.",
+    'svc2.tag1': 'Kitchens', 'svc2.tag2': 'Bathrooms', 'svc2.tag3': 'Basements',
+    'svc3.title': 'Commercial Renovation',
+    'svc3.text': "Fit-out and renovation of commercial spaces, offices and income properties, minimizing disruption to your operations or your tenants. We work with precision on schedules and compliance with commercial standards (accessibility, fire protection, ventilation), in coordination with your property managers.",
+    'svc3.tag1': 'Offices', 'svc3.tag2': 'Retail', 'svc3.tag3': 'Income Properties',
+    'svc4.title': 'Extensions & Additions',
+    'svc4.text': "Ground-level extensions, added floors or rear additions: we integrate new construction into your existing building while respecting its structural and architectural integrity. This includes structural analysis, municipal permit applications and matching finishes with the existing structure for a seamless result.",
+    'svc4.tag1': 'Added Floor', 'svc4.tag2': 'Extension', 'svc4.tag3': 'Municipal Permits',
+    'svc5.title': 'Masonry & Restoration',
+    'svc5.text': "Repair and restoration of brick and stone buildings: repointing, replacement of damaged units, wall rebuilding and traditional masonry work. Notably, we rebuilt a stone wall using the “Crazy Work” technique with coursed rubble pattern, respecting the building's original methods.",
+    'svc5.tag1': 'Brick', 'svc5.tag2': 'Stone', 'svc5.tag3': 'Repointing',
+    'svc6.title': 'Project Management',
+    'svc6.text': "Complete coordination of your work, from start to finish: plans and estimates, selection and supervision of subcontractors, schedules, budgets and site monitoring. A single point of contact at Atlas Nord to answer your questions and keep you informed at every stage, with transparent communication on progress and costs.",
+    'svc6.tag1': 'Plans & Estimates', 'svc6.tag2': 'Budgets', 'svc6.tag3': 'Site Monitoring',
+    'contact.tag': 'Contact Us',
+    'contact.title': 'Ready for Your Project?',
+    'contact.sub': 'Request your free quote. We respond within 24 hours.',
+    'contact.sectorLbl': 'Primary Service Area',
+    'contact.availLbl': 'Availability',
+    'contact.availVal': 'Mon–Fri: 7:00 AM–6:00 PM',
+    'contact.licenseLbl': 'RBQ License',
+    'label.phone': 'Phone',
+    'label.email': 'Email',
+    'form.firstname': 'First Name',
+    'form.lastname': 'Last Name',
+    'form.serviceType': 'Service Type',
+    'form.selectPlaceholder': 'Select a service',
+    'form.other': 'Other',
+    'form.address': 'Project Address',
+    'form.desc': 'Project Description',
+    'form.note': '100% free quote, no obligation. Response within 24 hours.',
+    'form.submit': 'Send Request',
+    'form.success': "✅ Thank you! We'll contact you within 24 hours.",
+    'ph.firstname': 'John', 'ph.lastname': 'Smith', 'ph.email': 'john@example.com',
+    'ph.desc': 'Describe your project (approximate size, current condition, photos available, etc.)',
+    'footer.desc': 'General construction contractors in Montreal. New construction, renovation and masonry — we build and restore with passion and precision for over 10 years.',
+    'footer.navTitle': 'Navigation',
+    'footer.servicesTitle': 'Services',
+    'footer.contact': 'Contact',
+    'footer.rights': '© 2025 Atlas Nord. All rights reserved. — RBQ: 5830-2126-01',
+    'meta.title': 'Atlas Nord | General Construction — Montreal',
+  },
+};
+
+function setLanguage(lang) {
+  const dict = I18N[lang];
+  if (!dict) return;
+  document.querySelectorAll('[data-i18n]').forEach((el) => {
+    const key = el.getAttribute('data-i18n');
+    if (dict[key] !== undefined) el.textContent = dict[key];
+  });
+  document.querySelectorAll('[data-i18n-placeholder]').forEach((el) => {
+    const key = el.getAttribute('data-i18n-placeholder');
+    if (dict[key] !== undefined) el.setAttribute('placeholder', dict[key]);
+  });
+  document.documentElement.lang = lang;
+  document.title = dict['meta.title'];
+  document.querySelectorAll('.lang-switch button').forEach((btn) => {
+    btn.classList.toggle('active', btn.getAttribute('data-lang') === lang);
+  });
+  try { localStorage.setItem('atlasnord-lang', lang); } catch (e) {}
+}
+
+(function() {
+  document.querySelectorAll('.lang-switch button').forEach((btn) => {
+    btn.addEventListener('click', () => setLanguage(btn.getAttribute('data-lang')));
+  });
+  let saved = 'fr';
+  try { saved = localStorage.getItem('atlasnord-lang') || 'fr'; } catch (e) {}
+  if (saved !== 'fr') setLanguage(saved);
+})();
+
+/* ---- Nav : fond flouté après scroll ---- */
+(function() {
+  const nav = document.querySelector('nav');
+  function onScroll() {
+    nav.classList.toggle('scrolled', window.scrollY > 40);
+  }
+  window.addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
+})();
+
+/* ---- Mobile menu ---- */
+function toggleMenu() {
+  document.getElementById('mobileMenu').classList.toggle('open');
+}
+function closeMenu() {
+  document.getElementById('mobileMenu').classList.remove('open');
+}
+
+/* ---- Form submit ---- */
+function submitForm(e) {
+  e.preventDefault();
+  document.getElementById('formSuccess').style.display = 'block';
+  e.target.reset();
+  setTimeout(() => document.getElementById('formSuccess').style.display = 'none', 5000);
+}
+
+/* =============================================
+   DIAPORAMA DU HERO — une photo à la fois, 30s chacune,
+   fondu enchaîné entre les transitions.
+============================================= */
+(function() {
+  const slides = document.querySelectorAll('#heroSlideshow .hero-slide');
+  if (!slides.length) return;
+  let idx = 0;
+  setInterval(() => {
+    slides[idx].classList.remove('active');
+    idx = (idx + 1) % slides.length;
+    slides[idx].classList.add('active');
+  }, 30000);
+})();
+</script>
+</body>
+</html>
